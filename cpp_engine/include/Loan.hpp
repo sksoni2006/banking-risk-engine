@@ -9,7 +9,7 @@ protected:
     long customerId;
     long branchId;
     double principal;
-    double annualRate; // percentage
+    double annualRate; // in percentage
     int termMonths;
 public:
     Loan(long id, long cust, long br, double princ, double rate, int term);

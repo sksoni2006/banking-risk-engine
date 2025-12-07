@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Simple report generator from data/risk_alerts.csv
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

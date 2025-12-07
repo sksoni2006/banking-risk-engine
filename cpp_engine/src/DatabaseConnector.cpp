@@ -11,7 +11,6 @@ DatabaseConnector::DatabaseConnector(const std::string &connStr) {
 DatabaseConnector::~DatabaseConnector() {}
 
 std::vector<std::string> DatabaseConnector::fetchActiveLoans() {
-    // Demo: read database/seed/seed-data.sql to find loans (very naive)
     std::vector<std::string> res;
     std::ifstream ifs("database/seed/seed-data.sql");
     std::string line;

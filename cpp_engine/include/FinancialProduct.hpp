@@ -4,5 +4,5 @@
 class FinancialProduct {
 public:
     virtual ~FinancialProduct() = default;
-    virtual std::string type() const = 0;   // <-- THIS WAS MISSING
+    virtual std::string type() const = 0;   
 };

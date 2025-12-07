@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
 set -e
-# Build and run C++ risk engine
 pushd cpp_engine >/dev/null
 mkdir -p build
 cd build

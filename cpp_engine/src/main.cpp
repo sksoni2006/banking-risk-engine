@@ -9,11 +9,8 @@
 int main() {
     std::cout << "Starting C++ Risk Engine (demo)\n";
 
-    // 1. USE ABSOLUTE PATH FOR DOCKER VOLUME
-    // This ensures the file goes to /app/data, which matches your Mac's folder
     std::string outputPath = "/app/data/risk_alerts.csv";
 
-    // Demo create loans (Hardcoded for now - mimicking Real Data)
     HomeLoan loan1(1, 1, 1, 1000000.0, 7.5, 240);
     HomeLoan loan2(2, 2, 1, 200000.0, 9.0, 60);
     std::vector<Loan*> loans = { &loan1, &loan2 };

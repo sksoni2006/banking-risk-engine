@@ -1,6 +1,5 @@
 :root {
-  /* Corporate Colors */
-  --primary: #0018a8; /* Deutsche Bank Blue */
+  --primary: #0018a8; 
   --secondary: #000000;
   --bg-light: #f3f5f7;
   --white: #ffffff;
@@ -11,8 +10,7 @@
   --danger: #d0021b;
   --warning: #f5a623;
 
-  /* Spacing & Layout */
-  --radius: 2px; /* Sharp corners for professional look */
+  --radius: 2px; 
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   --header-height: 64px;
 }
@@ -36,7 +34,6 @@ a {
   color: inherit;
 }
 
-/* Utilities */
 .container {
   max-width: 1200px;
   margin: 0 auto;

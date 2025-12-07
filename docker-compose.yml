@@ -13,8 +13,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      # Auto-seed the DB on first run (Optional)
-      # - ./database/seed/seed-data.sql:/docker-entrypoint-initdb.d/seed.sql
+     
 
   # 2. The Backend (Node API)
   backend:

@@ -11,7 +11,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Mount Routes
 app.use("/api/branches", branchesRouter);
 app.use("/api/customers", customersRouter);
 app.use("/api/accounts", accountsRouter);

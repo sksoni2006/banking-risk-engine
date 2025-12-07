@@ -15,7 +15,7 @@
 
 .card-value {
   font-size: 32px;
-  font-weight: 300; /* Light weight for elegance */
+  font-weight: 300; 
   color: var(--primary);
 }
 

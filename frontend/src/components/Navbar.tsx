@@ -12,7 +12,6 @@ import '../styles/navbar.css';
 export default function Navbar() {
   const location = useLocation();
   
-  // Helper to apply 'active' class if the current path matches
   const isActive = (path: string) => location.pathname === path ? 'nav-item active' : 'nav-item';
 
   return (

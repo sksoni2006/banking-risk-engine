@@ -6,8 +6,7 @@ export default function Dashboard() {
   const [stats, setStats] = useState({ branches: 0, customers: 0, loans: 0, alerts: 0 });
 
   useEffect(() => {
-    // In real app, fetch these from your /api endpoints
-    // For now we simulate or fetch simple counts
+  
     const fetchData = async () => {
       try {
         const [b, c, l, a] = await Promise.all([
@@ -60,7 +59,6 @@ export default function Dashboard() {
                 <td>02:00 AM</td>
                 <td><span style={{ color: 'var(--success)' }}>Completed</span></td>
               </tr>
-              {/* Add dynamic rows here */}
             </tbody>
           </table>
         </div>

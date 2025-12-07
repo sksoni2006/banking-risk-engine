@@ -3,19 +3,14 @@ FROM node:20
 
 WORKDIR /app
 
-# Copy dependency definitions
 COPY backend/package.json backend/package-lock.json ./
 
-# Install deps
 RUN npm install
 
-# Copy source code
 COPY backend/ ./
 
-# Generate Prisma Client (Crucial step)
 RUN npx prisma generate
 
-# Expose API port
 EXPOSE 4000
 
 # Start server

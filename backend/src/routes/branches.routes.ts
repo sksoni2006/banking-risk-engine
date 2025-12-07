@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// 🔥 CORE LOGIC: Calculate Branch Liquidity Risk
+// Calculate Branch Liquidity Risk
 router.get("/:id/liquidity", async (req: Request, res: Response) => {
   const branchId = parseInt(req.params.id);
 

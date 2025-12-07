@@ -6,9 +6,8 @@ import path from "path";
 
 const router = Router();
 
-// ---------------------------------------------------------
 // 1. GET ALL ALERTS
-// ---------------------------------------------------------
+
 router.get("/", async (req, res) => {
   try {
     const alerts = await prisma.riskAlert.findMany({
@@ -21,11 +20,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ---------------------------------------------------------
 // 2. SYNC CSV FROM C++ ENGINE
-// ---------------------------------------------------------
 router.post("/sync", async (req, res) => {
-  // Docker Path: /app/data/risk_alerts.csv
   const csvPath = path.join(process.cwd(), "data", "risk_alerts.csv");
   
   if (!fs.existsSync(csvPath)) {
@@ -63,7 +59,6 @@ router.post("/sync", async (req, res) => {
               branchId: bId, 
               loanId: lId,
               customerId: cId,
-              // Handle Date safely
               createdAt: row.created_at ? new Date(row.created_at) : new Date()
             }
           });
