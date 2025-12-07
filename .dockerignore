@@ -1,0 +1,16 @@
+# Ignore dependency folders (Docker installs its own)
+node_modules
+backend/node_modules
+frontend/node_modules
+
+# Ignore build artifacts
+cpp_engine/build
+frontend/dist
+backend/dist
+
+# Ignore env file (Safety)
+.env
+
+# Ignore git metadata
+.git
+.DS_Store

@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  # 1. The Database
+  db:
+    image: postgres:15
+    container_name: banking_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: bank123
+      POSTGRES_DB: banking_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Auto-seed the DB on first run (Optional)
+      # - ./database/seed/seed-data.sql:/docker-entrypoint-initdb.d/seed.sql
+
+  # 2. The Backend (Node API)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: banking_backend
+    ports:
+      - "4000:4000"
+    environment:
+      # Connect to 'db' service, not localhost
+      DATABASE_URL: "postgresql://admin:bank123@db:5432/banking_db?schema=public"
+    volumes:
+      - ./backend:/app          # Hot Reloading for code
+      - ./data:/app/data        # SHARED DATA FOLDER (Read CSV)
+      - /app/node_modules
+    depends_on:
+      - db
+
+  # 3. The Frontend (React UI)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: banking_frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app         # Hot Reloading for code
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:4000
+    depends_on:
+      - backend
+
+  # 4. The C++ Risk Engine
+  cpp_engine:
+    build:
+      context: .
+      dockerfile: Dockerfile.cpp
+    container_name: banking_cpp_engine
+    volumes:
+      - ./data:/app/data        # SHARED DATA FOLDER (Write CSV)
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
