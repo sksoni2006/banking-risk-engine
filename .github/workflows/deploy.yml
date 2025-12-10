@@ -1,0 +1,33 @@
+name: Production Deployment
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - name: Get Latest Code
+      uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Build TypeScript
+      run: npm run build  # <--- This converts server.ts into JavaScript (usually in a 'dist' folder)
+
+    - name: Restart Application
+      # Adjust 'dist/server.js' if your output folder is named something else (like 'build')
+      run: pm2 restart banking-app || pm2 start dist/server.js --name banking-app
