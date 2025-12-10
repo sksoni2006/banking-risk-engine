@@ -1,15 +1,32 @@
-# Dockerfile.frontend
-FROM node:20
+# Stage 1: The Build Stage (Creating the optimized files)
+FROM node:20 AS builder
 
 WORKDIR /app
 
+# Copy necessary files for installation/build
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm install
-
 COPY frontend/ ./
 
-# Expose UI port
-EXPOSE 3000
+# Run the build command (creates the 'dist' folder)
+# Your package.json confirmed 'npm run build' is correct
+RUN npm run build 
 
-# Start Vite with --host to allow browser access
-CMD ["npm", "run", "dev", "--", "--host", "--port", "3000"]
+# ----------------------------------------------------------------------
+
+# Stage 2: The Serve Stage (Using a tiny, fast Nginx server)
+FROM nginx:stable-alpine
+
+# Remove the default Nginx index page
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Add a custom Nginx configuration (optional, but good practice)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# CRITICAL STEP: Copy the built files from the 'builder' stage 
+# The source is /app/dist (Vite's default output)
+# The destination is Nginx's web root
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+EXPOSE 80 
+CMD ["nginx", "-g", "daemon off;"]
