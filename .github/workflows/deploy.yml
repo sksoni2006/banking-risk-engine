@@ -58,3 +58,5 @@ jobs:
           file: ./Dockerfile.backend
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/banking-risk-engine:latest
+          build-args: |
+            DATABASE_URL=${{ secrets.DATABASE_URL }}

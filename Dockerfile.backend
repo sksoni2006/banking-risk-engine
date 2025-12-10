@@ -1,4 +1,3 @@
-# Dockerfile.backend
 FROM node:20
 
 WORKDIR /app
@@ -8,6 +7,11 @@ COPY backend/package.json backend/package-lock.json ./
 RUN npm install
 
 COPY backend/ ./
+
+#  Accept the variable from GitHub Actions 
+ARG DATABASE_URL
+ENV DATABASE_URL=$DATABASE_URL
+# ---------------------------------------------------
 
 RUN npx prisma generate
 
